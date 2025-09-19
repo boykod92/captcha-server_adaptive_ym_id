@@ -1,9 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Капча: инициализация начата');
 
-  // Получаем metric_id из query-параметров URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const metricId = urlParams.get('metric_id') || null;
+  // Получаем metric_id из URL скрипта
+  let metricId = null;
+  const scripts = document.getElementsByTagName('script');
+  for (const script of scripts) {
+    if (script.src.includes('widget.js')) {
+      const urlParams = new URLSearchParams(new URL(script.src).search);
+      metricId = urlParams.get('metric_id') || null;
+      break;
+    }
+  }
   console.log(`Капча: metric_id = ${metricId}`);
 
   // Создаём оверлей
@@ -35,9 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Функция для вычисления актуального размера картинки
   function getImgSize() {
-    const size = img.getBoundingClientRect().width;
-    console.log(`Капча: размер изображения = ${size}px`);
-    return size;
+    return img.getBoundingClientRect().width;
   }
 
   // Перемещение картинки случайным образом
@@ -49,11 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const newY = Math.floor(Math.random() * maxY);
     img.style.left = newX + 'px';
     img.style.top = newY + 'px';
-    console.log(`Капча: изображение перемещено на x=${newX}, y=${newY}`);
   }
   moveImage();
   const moveInterval = setInterval(moveImage, 2000);
-  console.log('Капча: начато периодическое перемещение изображения (интервал 2000ms)');
 
   // Таймер и движение мыши / тача
   let mouseMoves = 0;
