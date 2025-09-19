@@ -1,8 +1,3 @@
-Модификация скрипта для динамического ID Метрики
-
-Твой текущий код в widget.js жёстко прописывает ID Метрики (83703373) в вызове ym.
-Нужно сделать так, чтобы ID брался динамически, например, из query-параметра в URL скрипта (<script src="https://captcha-server-technotim.vercel.app/widget.js?metric_id=XXXX"></script>).
-
 Основные изменения:
 
 Добавлен парсинг metric_id из URL через URLSearchParams.
@@ -12,6 +7,6 @@
 
 Как это работает:
 
-Пользователь подключает скрипт: <script src="https://captcha-server-technotim.vercel.app/widget.js?metric_id=12345678"></script>.
+Пользователь подключает скрипт: <script src="https://captcha-server-adaptive-ym-id.vercel.app/widget.js?metric_id=XXXXXX"></script>
 Скрипт читает metric_id=12345678 и использует его в ym(12345678, 'reachGoal', 'valid_user').
 Если параметр не указан, Метрика игнорируется, но CAPTCHA продолжает работать.
