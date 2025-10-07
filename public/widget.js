@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     img.style.top = newY + 'px';
   }
   moveImage();
-  const moveInterval = setInterval(moveImage, 2000);
+  const moveInterval = setInterval(moveImage, 3000);
 
   // Таймер и движение мыши / тача
   let mouseMoves = 0;
@@ -107,4 +107,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.log('Капча: инициализация завершена');
 });
+
 
